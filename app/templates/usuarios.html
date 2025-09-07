@@ -1,0 +1,44 @@
+{% extends "head.html" %}
+
+{% include "header.html" %}
+
+{% block content %}
+
+<div class="container-usuarios flex flex-col justify-center align-center">
+    <div class="titulo mt-[4rem] flex-col justify-center items-center">
+        <h2 class="text-3xl text-center text-orange-500 font-bold">LISTA DE USÁRIOS</h2>
+    </div>
+
+    <div class="pesquisa mt-[3rem] flex justify-center">
+        <form action="" method="get" class="flex flex-row gap-4 w-[800px]">
+                <div class="w-full">
+                    <input type="text" name="pesquisa" class="w-full border-[1px] rounded border-stone-400 px-1 py-1 outline-orange-500 outline-2" placeholder="Pesquisar Usuário">
+                </div>
+                <div class="w-70">
+                    <button type="submit" class="bg-orange-500 w-full text-stone-50 font-semibold text-lg rounded py-1 px-4 hover:bg-orange-700 cursor-pointer transition-all duration-500">Pesquisar</button>
+                </div>
+            </form>
+    </div>
+
+    <section class="usuarios flex justify-center mt-[3rem]">
+        <div class="lista-usuarios grid grid-cols-4 gap-[2rem]">
+            {% for user in usuarios.dados %}
+                <div class="card-usuario border-orange-500 border-[1px] rounded p-5">
+                    <div class="nome-svg flex flex-row gap-4 items-center justify-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.705 0.213 47.604)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex align-self-center lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>
+                        <h2 class="text-xl font-semibold text-orange-500">{{user.nome}}</h2>
+                    </div>
+                    <p class="mt-3 text-orange-500 font-semibold">Email: <span class="text-zinc-950 font-normal">{{user.email}}</span></p>
+                    <p class="mt-3 text-orange-500 font-semibold">Telefone: <span class="text-zinc-950 font-normal">{{user.telefone}}</span></p>
+                </div>
+               
+                                    
+            {% endfor %}
+        </div>
+
+    </section>
+
+
+</div>
+
+{% endblock %}

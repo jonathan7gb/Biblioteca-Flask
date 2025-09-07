@@ -1,0 +1,52 @@
+{% extends "head.html" %}
+
+{% include "header.html" %}
+
+{% block content %}
+
+<div class="container-index">
+
+    <div class="apresentacao text-center text-zinc-950 mt-[4rem]">
+        <h1 class="font-bold text-3xl mb-2">BEM-VINDO A BIBLIOTECA FLASK</h1>
+        <p>O melhor sistema de gerenciamento de biblioteca para você!</p>
+    </div>
+    
+    <div class="cards-index flex flex-row justify-evenly gap-5 mt-[5rem]">
+
+        <div class="card border-orange-500 border-[1px] rounded p-[1rem]">
+            <div class="imagem-card w-[300px] rounded">
+                 <img src="{{url_for('static', filename='img/biblioteca.png')}}" alt="Imagem bibliteca" class="w-full rounded h-[180px]  object-cover">
+            </div>
+            <div class="texto text-center mt-3 box-border">
+                <h2 class="text-xl text-zinc-950 font-bold">{% if current_user.email == 'admin@gmail.com'%} Gerenciar Livros {% else %} Livros {% endif %}</h2>
+                <a href="{{ url_for('livros') }}" class="box-borde w-full inline-block bg-orange-500 text-stone-50 font-semibold text-lg p-2 mt-[1rem] rounded hover:bg-orange-600 cursor-pointer transition-all duration-500">Clique aqui!</a>
+            </div>
+        </div>
+
+        {% if current_user.email == 'admin@gmail.com'%}
+            <div class="card border-orange-500 border-[1px] rounded p-[1rem]">
+                <div class="imagem-card w-[300px] rounded">
+                    <img src="{{url_for('static', filename='img/users.jpg')}}" alt="Imagem bibliteca" class="w-full rounded h-[180px]  object-cover">
+                </div>
+                <div class="texto text-center mt-3 box-border">
+                    <h2 class="text-xl text-zinc-950 font-bold">Gerenciar Usuários</h2>
+                    <a href="{{ url_for('usuarios') }}" class="box-borde w-full inline-block bg-orange-500 text-stone-50 font-semibold text-lg p-2 mt-[1rem] rounded hover:bg-orange-600 cursor-pointer transition-all duration-500">Clique aqui!</a>
+                </div>
+            </div>
+        {% endif %} 
+
+        <div class="card border-orange-500 border-[1px] rounded p-[1rem]">
+            <div class="imagem-card w-[300px] rounded">
+                 <img src="{{url_for('static', filename='img/emprestimos.png')}}" alt="Imagem bibliteca" class="w-full rounded h-[180px]  object-cover">
+            </div>
+            <div class="texto text-center mt-3 box-border">
+                <h2 class="text-xl text-zinc-950 font-bold">{% if current_user.email == 'admin@gmail.com'%} Gerenciar Empréstimos {% else %} Empréstimos {% endif %}</h2>
+                <a href="" class="box-borde w-full inline-block bg-orange-500 text-stone-50 font-semibold text-lg p-2 mt-[1rem] rounded hover:bg-orange-600 cursor-pointer transition-all duration-500">Clique aqui!</a>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}
+

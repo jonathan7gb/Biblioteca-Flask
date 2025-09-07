@@ -1,0 +1,31 @@
+{% extends "head.html" %}
+
+{% block content %}
+
+<header class="font-sans px-10 py-5 bg-orange-500">
+    <div class="container-header flex justify-between items-center">
+        <div class="logo text-stone-50 font-bold text-3xl">
+            <h1>BIBLIOTECA</h1>
+        </div>
+
+        <nav class="nav flex gap-12 text-stone-50 font-medium">
+            <a href="{{ url_for('homepage') }}">Home</a>
+            <a href="{{ url_for('livros') }}">Livros</a>
+             {% if current_user.email == 'admin@gmail.com'%}
+             <a href="{{ url_for('usuarios') }}">Usuários</a>
+            {% endif %} 
+            <a href="">Empréstimos</a>
+        </nav>
+
+        <div class="login flex gap-4">
+            {% if current_user.is_authenticated %}
+            <p class="bg-stone-50 px-6 py-2 text-orange-500 rounded font-semibold">{{current_user.nome}}</p>
+                <a href="{{ url_for('logout') }}" class="bg-red-800 px-6 py-2 text-stone-50 rounded font-semibold cursor-pointer hover:bg-red-900 transition-all duration-500">Sair</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="bg-stone-50 px-6 py-2 text-orange-500 rounded font-semibold cursor-pointer hover:bg-orange-100 transition-all duration-500">Login</a>
+                <a href="{{ url_for('registeruser') }}" class="bg-stone-50 px-4 py-2 text-orange-500 rounded font-semibold cursor-pointer hover:bg-orange-100 transition-all duration-500">Registrar</a>
+            {% endif %}
+        </div>
+    </div>
+</header>
+{% endblock %}

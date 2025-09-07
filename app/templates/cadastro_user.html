@@ -1,0 +1,35 @@
+{% extends "head.html" %}
+
+{% include "header.html" %}
+
+{% block content %}
+<div class="container-login w-100 flex justify-center align-center">
+    <section class="forms-login mt-[5rem] border-orange-500 border-[1px] p-10 rounded w-[500px]">
+                <h3 class="text-center text-3xl font-bold mt-4 text-orange-500">Registrar-se</h3>
+                <form action="" method="post" class="flex flex-col">
+                    {{form.csrf_token}}
+                    {{ form.hidden_tag()}}
+
+                    {{form.nome.label(class="text-orange-500 font-medium mt-5")}}
+                    {{form.nome(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+
+                    {{form.email.label(class="text-orange-500 font-medium mt-5")}}
+                    {{form.email(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+
+                    {{form.telefone.label(class="text-orange-500 font-medium mt-5")}}
+                    {{form.telefone(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+
+                    {{form.senha.label(class="text-orange-500 font-medium mt-5")}}
+                    {{form.senha(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+
+                    {{form.confirmacao_senha.label(class="text-orange-500 font-medium mt-5")}}
+                    {{form.confirmacao_senha(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+
+                    {{form.btnCadastrar(class="bg-orange-500 w-100 text-stone-50 font-semibold text-lg mt-7 rounded py-1 hover:bg-orange-700 cursor-pointer transition-all duration-500")}}
+                </form>
+                <p id="semConta" class="mt-7 text-center">Já possui uma conta? <a href="{{url_for('login')}}" id="cadastre-se-login" class="text-orange-500 font-semibold text-lg">Fazer login</a></p>
+    </section>
+
+</div>
+
+{% endblock %}

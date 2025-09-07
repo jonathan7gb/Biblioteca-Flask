@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="box-border">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Biblioteca Flask {% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+        extend: {}
+        }
+    }
+    </script>
+</head>
+<body>
+
+        {% block content %} {% endblock %}
+
+</body>
+</html>
