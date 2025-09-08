@@ -43,18 +43,24 @@
                         <h2 class="text-xl font-semibold text-orange-500">Empréstimo {{emp.id}}</h2>
                     </div>
                     <p class="mt-3 text-orange-500 font-semibold">Aluno: <span class="text-zinc-950 font-normal">{{emp.user.nome}} [{{emp.user.id}}]</span></p>
-                    <p class="mt-3 text-orange-500 font-semibold">Livro: {% if emp.livro %}<span class="text-zinc-950 font-normal">{{emp.livro.titulo}} [{{emp.livro.id}}] </span> {% else %} <span class="text-red-600 font-normal"> Livro Exlcuído do Sistema</span>  {% endif %}</p>
+                    <p class="mt-3 text-orange-500 font-semibold">Livro: {% if emp.livro %}<span class="text-zinc-950 font-normal">{{emp.livro.titulo}} [{{emp.livro.id}}] </span> {% else %} <span class="text-red-600 font-normal"> Livro Excluído do Sistema</span>  {% endif %}</p>
                     <p class="mt-3 text-orange-500 font-semibold">Data do Empréstimo: <span class="text-zinc-950 font-normal">{{emp.data_emprestimo.strftime('%d/%m/%Y')}}</span></p>
                     <p class="mt-3 text-orange-500 font-semibold">Data de Devolucao: <span class="text-zinc-950 font-normal">{{emp.data_devolucao.strftime('%d/%m/%Y')}}</span</p>
                     <p class="mt-3 mb-3 text-orange-500 font-semibold">Status do Empréstimo: {% if emp.statusEmprestimo == 'Devolução Atrasada' %} <span class="text-red-800 font-normal animate-pulse">{{emp.statusEmprestimo}}</span> {% elif emp.statusEmprestimo == 'Entrega Hoje' %} <span class="text-amber-500 font-normal animate-pulse">{{emp.statusEmprestimo}}</span> {% else %}  <span class="text-green-600 font-normal">{{emp.statusEmprestimo}}</span> {% endif %}</p>
                     
                     {% if current_user.email == 'admin@gmail.com' %}
+                    <div class="botoes flex flex-row gap-4">
+                        
                         <form action="{{ url_for('delete_emprestimo', id=emp.id) }}" method="POST" style="display:inline;">
                             <button type="submit" class="border border-orange-500 p-1 rounded bg-orange-500"
                                     onclick="return confirm('Tem certeza que deseja excluir este emprestimo?');">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                             </button>
                         </form>
+
+                        <a href="{{url_for('editar_emprestimo', id=emp.id)}}" class="border border-orange-500 p-1 rounded bg-orange-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg></a>
+
+                    </div>
                     {% endif %}
                 </div>
             {% endif %}

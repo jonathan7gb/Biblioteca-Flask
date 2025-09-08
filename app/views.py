@@ -99,6 +99,19 @@ def delete_livro(id):
     
     return redirect(url_for('livros')) 
 
+@app.route('/livros/editar/<int:id>', methods=['GET', 'POST'])
+@login_required
+def editar_livro(id):
+    livro = Livro.query.get_or_404(id)
+    form = LivroForm(obj=livro)
+
+    if form.validate_on_submit():
+        form.populate_obj(livro)
+        db.session.commit()
+        return redirect(url_for('livros'))
+
+    return render_template('editar_livro.html', form=form, livro=livro)
+
 @app.route('/emprestimos/')
 @login_required
 def emprestimos():
@@ -131,3 +144,16 @@ def delete_emprestimo(id):
     db.session.commit()
     
     return redirect(url_for('emprestimos')) 
+
+@app.route('/emprestimos/editar/<int:id>', methods=['GET', 'POST'])
+@login_required
+def editar_emprestimo(id):
+    emprestimo = Emprestimo.query.get_or_404(id)
+    form = EmprestimoForm(obj=emprestimo)
+
+    if form.validate_on_submit():
+        form.populate_obj(emprestimo)
+        db.session.commit()
+        return redirect(url_for('emprestimos'))
+
+    return render_template('editar_emprestimo.html', form=form, emprestimo=emprestimo)

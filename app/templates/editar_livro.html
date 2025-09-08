@@ -1,0 +1,44 @@
+{% extends "head.html" %}
+
+{% include "header.html" %}
+
+{% block content %}
+<div class="container-login w-100 flex justify-center align-center">
+    <section class="forms-login mt-[5rem] border-orange-500 border-[1px] p-10 rounded w-[500px]">
+                <h3 class="text-center text-3xl font-bold mt-4 text-orange-500">Editar Livro</h3>
+                <form action="{{ url_for('editar_livro', id=livro.id) }}" method="post" class="flex flex-col">
+                    {{form.csrf_token}}
+                    {{ form.hidden_tag()}}
+
+                    {{form.titulo.label(class="text-orange-500 font-medium mt-5")}}
+                    {{form.titulo(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+
+                    {{form.autor.label(class="text-orange-500 font-medium mt-5")}}
+                    {{form.autor(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+
+                    {{form.editora.label(class="text-orange-500 font-medium mt-5")}}
+                    {{form.editora(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+                    
+                    {{form.anoPublicacao.label(class="text-orange-500 font-medium mt-5")}}
+                    {{form.anoPublicacao(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+
+                    {{form.genero.label(class="text-orange-500 font-medium mt-5")}}
+                    {{form.genero(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+
+                    {{form.quantidade_disponivel.label(class="text-orange-500 font-medium mt-5")}}
+                    {{form.quantidade_disponivel(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+                    
+                    {% for field, errors in form.errors.items() %}
+                    {% for error in errors %}
+                            <div class="text-red-500 mt-2">{{ error }}</div>
+                        {% endfor %}
+                    {% endfor %}
+
+                    {{form.btnSubmit(class="bg-orange-500 w-100 text-stone-50 font-semibold text-lg mt-7 rounded py-1 hover:bg-orange-700 cursor-pointer transition-all duration-500")}}
+                
+                </form>
+    </section>
+
+</div>
+
+{% endblock %}
