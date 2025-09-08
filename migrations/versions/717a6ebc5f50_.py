@@ -1,8 +1,8 @@
-"""recriar emprestimo com FKs nomeadas
+"""empty message
 
-Revision ID: 1e97e2cb9d7b
-Revises: 6ae6c2ed0922
-Create Date: 2025-09-07 20:36:14.347223
+Revision ID: 717a6ebc5f50
+Revises: 
+Create Date: 2025-09-08 07:22:57.715884
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '1e97e2cb9d7b'
-down_revision = '6ae6c2ed0922'
+revision = '717a6ebc5f50'
+down_revision = None
 branch_labels = None
 depends_on = None
 

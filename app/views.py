@@ -107,7 +107,7 @@ def emprestimos():
     dados = Emprestimo.query.join(User).order_by(Emprestimo.id)
     
     if pesquisa != '':
-        dados = dados.filter(Emprestimo.id.ilike(f'%{pesquisa}%'))
+        dados = dados.join(Emprestimo.livro).filter(Livro.titulo.ilike(f'%{pesquisa}%'))
     
     emprestimos = {'dados' : dados.all()}
     return render_template('emprestimos.html', emprestimos=emprestimos)

@@ -24,7 +24,7 @@
     <div class="pesquisa mt-[3rem] flex justify-center">
         <form action="" method="get" class="flex flex-row gap-4 w-[800px]">
                 <div class="w-full">
-                    <input type="text" name="pesquisa" class="w-full border-[1px] rounded border-stone-400 px-1 py-1 outline-orange-500 outline-2" placeholder="Pesquisar Empréstimo por Id">
+                    <input type="text" name="pesquisa" class="w-full border-[1px] rounded border-stone-400 px-1 py-1 outline-orange-500 outline-2" placeholder="Pesquisar Empréstimo por Livro">
                 </div>
                 <div class="w-70">
                     <button type="submit" class="bg-orange-500 w-full text-stone-50 font-semibold text-lg rounded py-1 px-4 hover:bg-orange-700 cursor-pointer transition-all duration-500">Pesquisar</button>
@@ -33,7 +33,7 @@
     </div>
 
     <section class="emprestimos flex justify-center mt-[3rem]">
-        <div class="lista-emprestimos grid grid-cols-4 gap-[2rem] mb-[2rem]" >
+        <div class="lista-emprestimos grid grid-cols-4 gap-[2rem] mb-[2rem] w-[1500px]" >
             {% for emp in emprestimos.dados %}
 
             {% if current_user.id == emp.user.id or current_user.email == 'admin@gmail.com' %}
@@ -46,7 +46,7 @@
                     <p class="mt-3 text-orange-500 font-semibold">Livro: {% if emp.livro %}<span class="text-zinc-950 font-normal">{{emp.livro.titulo}} [{{emp.livro.id}}] </span> {% else %} <span class="text-red-600 font-normal"> Livro Exlcuído do Sistema</span>  {% endif %}</p>
                     <p class="mt-3 text-orange-500 font-semibold">Data do Empréstimo: <span class="text-zinc-950 font-normal">{{emp.data_emprestimo.strftime('%d/%m/%Y')}}</span></p>
                     <p class="mt-3 text-orange-500 font-semibold">Data de Devolucao: <span class="text-zinc-950 font-normal">{{emp.data_devolucao.strftime('%d/%m/%Y')}}</span</p>
-                    <p class="mt-3 mb-3 text-orange-500 font-semibold">Status do Empréstimo: {% if emp.statusEmprestimo == 'Devolução Atrasada' %} <span class="text-red-800 font-normal">{{emp.statusEmprestimo}}</span> {% elif emp.statusEmprestimo == 'Entrega Hoje' %} <span class="text-amber-500 font-normal">{{emp.statusEmprestimo}}</span> {% else %}  <span class="text-green-600 font-normal">{{emp.statusEmprestimo}}</span> {% endif %}</p>
+                    <p class="mt-3 mb-3 text-orange-500 font-semibold">Status do Empréstimo: {% if emp.statusEmprestimo == 'Devolução Atrasada' %} <span class="text-red-800 font-normal animate-pulse">{{emp.statusEmprestimo}}</span> {% elif emp.statusEmprestimo == 'Entrega Hoje' %} <span class="text-amber-500 font-normal animate-pulse">{{emp.statusEmprestimo}}</span> {% else %}  <span class="text-green-600 font-normal">{{emp.statusEmprestimo}}</span> {% endif %}</p>
                     
                     {% if current_user.email == 'admin@gmail.com' %}
                         <form action="{{ url_for('delete_emprestimo', id=emp.id) }}" method="POST" style="display:inline;">
