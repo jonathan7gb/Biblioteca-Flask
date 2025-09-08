@@ -111,3 +111,13 @@ def emprestimo_cadastro():
         form.save()
         return redirect(url_for('emprestimos'))
     return render_template('cadastro_emprestimo.html', context=context, form=form)
+
+@app.route('/emprestimos/delete/<int:id>', methods=['POST'])
+@login_required
+def delete_emprestimo(id):
+    emprestimo = Emprestimo.query.get_or_404(id)
+
+    db.session.delete(emprestimo)
+    db.session.commit()
+    
+    return redirect(url_for('emprestimos')) 
