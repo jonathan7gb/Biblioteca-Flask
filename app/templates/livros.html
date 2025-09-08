@@ -46,7 +46,13 @@
                     <p class="mt-3 text-orange-500 font-semibold">Editora: <span class="text-zinc-950 font-normal">{{livro.editora}}</span></p>
                     <p class="mt-3 text-orange-500 font-semibold">Gênero: <span class="text-zinc-950 font-normal">{{livro.genero}}</span></p>
                     <p class="mt-3 text-orange-500 font-semibold">Exemplares Disponíveis: <span class="text-zinc-950 font-normal">{{livro.quantidade_disponivel}}</span></p>
-                    <p class="mt-3 text-orange-500 font-semibold">Status:{% if livro.status == 'Indisponível' %} <span class="text-red-800 font-normal">{{livro.status}}</span> {% else %} <span class="text-green-600 font-normal">{{livro.status}}</span> {% endif %} </p>
+                    <p class="mt-3 mb-3 text-orange-500 font-semibold">Status:{% if livro.status == 'Indisponível' %} <span class="text-red-800 font-normal">{{livro.status}}</span> {% else %} <span class="text-green-600 font-normal">{{livro.status}}</span> {% endif %} </p>
+                    <form action="{{ url_for('delete_livro', id=livro.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="border border-orange-500 p-1 rounded bg-orange-500"
+                            onclick="return confirm('Tem certeza que deseja excluir este livro?');">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
+</form>
                 </div>
                
                                     

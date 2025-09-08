@@ -79,6 +79,16 @@ def livro_cadastro():
         return redirect(url_for('livros'))
     return render_template('cadastro_livro.html', context=context, form=form)
 
+@app.route('/livros/delete/<int:id>', methods=['POST'])
+@login_required
+def delete_livro(id):
+    livro = Livro.query.get_or_404(id)
+
+    db.session.delete(livro)
+    db.session.commit()
+    
+    return redirect(url_for('livros')) 
+
 @app.route('/emprestimos/')
 @login_required
 def emprestimos():
