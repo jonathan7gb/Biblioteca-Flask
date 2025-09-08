@@ -56,6 +56,16 @@ def usuarios():
     usuarios = {'dados' : dados.all()}
     return render_template('usuarios.html', usuarios=usuarios)
 
+@app.route('/usuarios/delete/<int:id>', methods=['POST'])
+@login_required
+def delete_usuario(id):
+    usuarios = User.query.get_or_404(id)
+
+    db.session.delete(usuarios)
+    db.session.commit()
+    
+    return redirect(url_for('usuarios')) 
+
 @app.route('/livros/')
 @login_required
 def livros():

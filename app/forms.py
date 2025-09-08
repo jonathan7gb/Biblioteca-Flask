@@ -56,7 +56,8 @@ class LivroForm(FlaskForm):
     def save(self):
         qtd = self.quantidade_disponivel.data
         status1 = "Indisponível" if qtd <= 0 else "Disponível"
-
+        qtd = self.quantidade_disponivel.data if qtd > 0 else 0
+        
         livro = Livro(
             titulo = self.titulo.data,
             autor = self.autor.data,
