@@ -41,7 +41,7 @@
             </div>
             <div class="texto text-center mt-3 box-border">
                 <h2 class="text-xl text-zinc-950 font-bold">{% if current_user.email == 'admin@gmail.com'%} Gerenciar Empréstimos {% else %} Empréstimos {% endif %}</h2>
-                <a href="" class="box-borde w-full inline-block bg-orange-500 text-stone-50 font-semibold text-lg p-2 mt-[1rem] rounded hover:bg-orange-600 cursor-pointer transition-all duration-500">Clique aqui!</a>
+                <a href="{{ url_for('emprestimos') }}" class="box-borde w-full inline-block bg-orange-500 text-stone-50 font-semibold text-lg p-2 mt-[1rem] rounded hover:bg-orange-600 cursor-pointer transition-all duration-500">Clique aqui!</a>
             </div>
         </div>
         

@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, FileField, IntegerField, SelectField
+from wtforms import StringField, SubmitField, PasswordField, FileField, IntegerField, SelectField, DateField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 from app import db, bcrypt, app
 from app.models import User, Livro, Emprestimo
+from datetime import date
 
 import os
 from werkzeug.utils import secure_filename
@@ -69,10 +70,11 @@ class LivroForm(FlaskForm):
         db.session.commit()
 
 class EmprestimoForm(FlaskForm):
-    data_emprestimo = StringField('Data do Empréstimo', validators=[DataRequired()])
-    data_devolucao = StringField('Data de Devolução', validators=[DataRequired()])
+    data_emprestimo = DateField('Data do Empréstimo', validators=[DataRequired()])
+    data_devolucao = DateField('Data de Devolução', validators=[DataRequired()])
     user_id = SelectField('Usuário', coerce=int, validators=[DataRequired()])
     livro_id = SelectField('Livro', coerce=int, validators=[DataRequired()])
+    statusEmprestimo = StringField('Status')
     btnSubmit = SubmitField('Enviar')
 
     def __init__(self, *args, **kwargs):
@@ -80,13 +82,22 @@ class EmprestimoForm(FlaskForm):
         self.user_id.choices = [(u.id, u.nome) for u in User.query.all()]
         self.livro_id.choices = [(l.id, l.titulo) for l in Livro.query.all()]
     
-    def save(self, user_id):
+    def save(self):
+        hoje = date.today()
+
+        if self.data_devolucao.data < hoje:
+            status = "Devolução Atrasada"
+        elif self.data_devolucao.data == hoje:
+            status = "Entrega Hoje"
+        else:
+            status = "Dentro do Prazo"
 
         emprestimo = Emprestimo(
-            data_emprestimo = self.data_emprestimo.data,
-            data_devolucao = self.data_devolucao.data,
-            user_id = self.user_id.data,
-            livro_id = self.livro_id.data
+            data_emprestimo=self.data_emprestimo.data,
+            data_devolucao=self.data_devolucao.data,
+            user_id=self.user_id.data,
+            livro_id=self.livro_id.data,
+            statusEmprestimo = status
         )
 
         db.session.add(emprestimo)

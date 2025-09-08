@@ -14,7 +14,7 @@
              {% if current_user.email == 'admin@gmail.com'%}
              <a href="{{ url_for('usuarios') }}">Usuários</a>
             {% endif %} 
-            <a href="">Empréstimos</a>
+            <a href="{{ url_for('emprestimos') }}">Empréstimos</a>
         </nav>
 
         <div class="login flex gap-4">

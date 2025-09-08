@@ -78,3 +78,26 @@ def livro_cadastro():
         form.save()
         return redirect(url_for('livros'))
     return render_template('cadastro_livro.html', context=context, form=form)
+
+@app.route('/emprestimos/')
+@login_required
+def emprestimos():
+    if request.method == 'GET':
+        pesquisa = request.args.get('pesquisa', '')
+    dados = Emprestimo.query.join(User).order_by(Emprestimo.id)
+    
+    if pesquisa != '':
+        dados = dados.filter(User.nome.ilike(f'%{pesquisa}%'))
+    
+    emprestimos = {'dados' : dados.all()}
+    return render_template('emprestimos.html', emprestimos=emprestimos)
+
+@app.route('/cadastroemprestimo/', methods=['GET', 'POST'])
+@login_required
+def emprestimo_cadastro():
+    form = EmprestimoForm()
+    context = {}
+    if form.validate_on_submit():
+        form.save()
+        return redirect(url_for('emprestimos'))
+    return render_template('cadastro_emprestimo.html', context=context, form=form)

@@ -31,7 +31,8 @@ class Livro(db.Model):
 
 class Emprestimo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    data_emprestimo = db.Column(db.DateTime, default=datetime.now())
-    data_devolucao = db.Column(db.DateTime, default=datetime.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-    livro_id = db.Column(db.Integer, db.ForeignKey('livro.id'), nullable=True)
+    data_emprestimo = db.Column(db.DateTime, default=datetime.now)
+    data_devolucao = db.Column(db.DateTime, default=datetime.now)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', name="fk_emprestimo_user"), nullable=True)
+    livro_id = db.Column(db.Integer, db.ForeignKey('livro.id', name="fk_emprestimo_livro"), nullable=True)
+    statusEmprestimo = db.Column(db.String(100), nullable=True)
