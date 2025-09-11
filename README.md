@@ -2,4 +2,4 @@
 
 <br>
 
-Ainda está em Desenvolvimento!!
+Terminei já, só falta add umas verificação mas nada de mais. 
